@@ -1,0 +1,20 @@
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    build:
+      context: .
+      dockerfile: requirements/nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - wordpress_data:/var/www/html
+    restart: always
+
+volumes:
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/enzo/data/wordpress
+      o: bind
