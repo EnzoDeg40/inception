@@ -20,11 +20,26 @@ services:
       - "9000:9000"
     volumes:
       - wordpress_data:/var/www/html
-      
+    restart: always
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    build:
+      context: . # verifier le contexte https://stackoverflow.com/questions/32997269/copying-a-file-in-a-dockerfile-no-such-file-or-directory
+      dockerfile: requirements/mariadb/Dockerfile
+    ports:
+      - "3306:3306"
+
 volumes:
   wordpress_data:
     driver: local
     driver_opts:
       type: none
       device: /home/enzo/data/wordpress
+      o: bind
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/enzo/data/mariadb
       o: bind
