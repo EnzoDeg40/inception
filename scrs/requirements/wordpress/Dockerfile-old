@@ -1,0 +1,28 @@
+FROM debian:latest
+
+# RUN ls
+
+# Install 
+RUN apt-get update
+RUN apt-get install -y wget php8.2 php8.2-fpm
+
+# DL Wordpress
+RUN wget https://wordpress.org/latest.tar.gz
+RUN tar -xvzf latest.tar.gz 
+RUN rm -rf /var/www/html/
+RUN mkdir -p /var/www/html
+RUN mv wordpress/* /var/www/html/
+
+# cp wp-config-sample.php wp-config.php
+
+# Clean
+# RUN rm latest.tar.gz
+
+# Configure PHP-FPM to listen on port 9000
+# COPY requirements/wordpress/php-fpm.conf /etc/php/8.2/fpm/pool.d/www.conf
+
+# Expose
+EXPOSE 9000
+
+# Start PHP-FPM
+CMD ["php", "--nodaemonize"]

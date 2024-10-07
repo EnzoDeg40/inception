@@ -7,10 +7,20 @@ services:
       dockerfile: requirements/nginx/Dockerfile
     ports:
       - "8080:80"
+    # volumes:
+      # - wordpress_data:/var/www/html
+    restart: always # sure ?
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    build:
+      context: .
+      dockerfile: requirements/wordpress/Dockerfile
+    ports:
+      - "9000:9000"
     volumes:
       - wordpress_data:/var/www/html
-    restart: always # sure ?
-
+      
 volumes:
   wordpress_data:
     driver: local
