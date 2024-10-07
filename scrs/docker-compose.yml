@@ -9,7 +9,7 @@ services:
       - "8080:80"
     volumes:
       - wordpress_data:/var/www/html
-    restart: always
+    restart: always # sure ?
 
 volumes:
   wordpress_data:

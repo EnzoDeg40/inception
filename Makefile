@@ -1,5 +1,8 @@
 all:
-	docker compose -f srcs/docker-compose.yml up --build -d
+	docker compose -f scrs/docker-compose.yml up -d --build
+
 
 clean:
-	docker compose -f srcs/docker-compose.yml down
+	rm -rf /home/enzo/data/wordpress/*
+# illegal operation
+	docker system prune -a -f
