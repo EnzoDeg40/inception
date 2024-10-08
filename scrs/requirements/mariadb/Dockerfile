@@ -1,18 +1,15 @@
-FROM debian:latest
+FROM debian:bullseye
 
 # Variables d'environnement pour éviter les prompts interactifs
-ENV DEBIAN_FRONTEND=noninteractive
+# ENV DEBIAN_FRONTEND=noninteractive
 
+# Installation de MariaDB et PS
 RUN apt-get update
-RUN apt-get install -y mariadb-server mariadb-client
+RUN apt-get install -y mariadb-server mariadb-client procps
 
 EXPOSE 3306
 
-# RUN service mysql start && \
-#     mysql -e "CREATE DATABASE wp;" && \
-#     mysql -e "CREATE USER 'enzo'@'%' IDENTIFIED BY 'enzo';" && \
-#     mysql -e "GRANT ALL PRIVILEGES ON wp.* TO 'enzo'@'%';" && \
-#     mysql -e "FLUSH PRIVILEGES;"
-
-# CMD ["mysqld", "--bind-address=0.0.0.0"]
-CMD ["mysqld_safe"]
+# Lance le script de configuration de la base de données
+COPY ./requirements/mariadb/setup.sh /tmp/setup.sh
+RUN chmod +x /tmp/setup.sh
+CMD ["/bin/bash", "/tmp/setup.sh"]
