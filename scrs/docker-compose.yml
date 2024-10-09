@@ -1,4 +1,14 @@
 services:
+  dnsmasq:
+    container_name: dnsmasq
+    image: dnsmasq
+    build:
+      context: .
+      dockerfile: requirements/bonus/dnsmasq/Dockerfile
+    ports:
+      - "53:53"
+      - "53:53/udp"
+    restart: always
   nginx:
     container_name: nginx
     image: nginx
