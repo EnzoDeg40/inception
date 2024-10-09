@@ -18,7 +18,7 @@ services:
     depends_on:
       - mariadb
     ports:
-      - "8080:80"
+      - "8080:8080" # external:internal
     # volumes:
       # - wordpress_data:/var/www/html
     restart: always # sure ?
