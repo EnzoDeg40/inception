@@ -7,7 +7,7 @@ COPY ./requirements/nginx/conf/nginx.conf /etc/nginx/sites-available/default
 COPY requirements/nginx/conf/index.html /var/www/html/index.html
 
 # mkdir -p requirements/nginx/certs
-# openssl req -newkey rsa:2048 -nodes -keyout requirements/nginx/certs/server.key -x509 -days 365 -out requirements/nginx/certs/server.crt
+# openssl req -newkey rsa:2048 -nodes -keyout server.key -x509 -days 365 -out server.crt
 
 # Ajoute le certificat
 COPY ./requirements/nginx/certs/server.crt /etc/nginx/certs/server.crt  

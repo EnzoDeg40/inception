@@ -17,10 +17,10 @@ service mariadb start
 # mysql -e "FLUSH PRIVILEGES"
 # # Any subsequent tries to run queries this way will get access denied because lack of usr/pwd param
 
-mariadb -e "CREATE DATABASE wp;"
-mysql -e "CREATE USER 'enzo'@'%' IDENTIFIED BY 'enzo';"
-mysql -e "GRANT ALL PRIVILEGES ON wp.* TO 'enzo'@'%';"
-mysql -e "FLUSH PRIVILEGES;"
+mariadb -e "CREATE DATABASE ${MARIA_DATABASE};"
+mariadb -e "CREATE USER '${MARIA_USER}'@'%' IDENTIFIED BY '${MARIA_PASSWORD}';"
+mariadb -e "GRANT ALL PRIVILEGES ON ${MARIA_DATABASE}.* TO '${MARIA_USER}'@'%';"
+mariadb -e "FLUSH PRIVILEGES;"
 
 # set root password
 # mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'enzo'"

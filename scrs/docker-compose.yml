@@ -41,12 +41,8 @@ services:
       dockerfile: requirements/mariadb/Dockerfile
     ports:
       - "3306:3306"
-    # legal ?
-    # environment: 
-    #   MYSQL_ROOT_PASSWORD: root
-    #   MYSQL_DATABASE: wordpress
-    #   MYSQL_USER: enzo
-    #   MYSQL_PASSWORD: enzo
+    env_file:
+      - .env
     # volumes:
     #   - mariadb_data:/var/lib/mysql
       
