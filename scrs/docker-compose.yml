@@ -9,6 +9,8 @@ services:
       - "53:53"
       - "53:53/udp"
     restart: always
+    networks:
+      - inception
   nginx:
     container_name: nginx
     image: nginx
@@ -16,12 +18,14 @@ services:
       context: .
       dockerfile: requirements/nginx/Dockerfile
     depends_on:
-      - mariadb
+      - wordpress
     ports:
       - "8080:8080" # external:internal
     # volumes:
       # - wordpress_data:/var/www/html
     restart: always # sure ?
+    networks:
+      - inception
   wordpress:
     container_name: wordpress
     image: wordpress
@@ -30,9 +34,13 @@ services:
       dockerfile: requirements/wordpress/Dockerfile
     ports:
       - "9000:9000"
-    volumes:
-      - wordpress_data:/var/www/html
+    # volumes:
+    #   - wordpress_data:/var/www/html
     restart: always
+    depends_on:
+      - mariadb
+    networks:
+      - inception
   mariadb:
     container_name: mariadb
     image: mariadb
@@ -45,7 +53,8 @@ services:
       - .env
     # volumes:
     #   - mariadb_data:/var/lib/mysql
-      
+    networks:
+      - inception
 
 
 volumes:
@@ -61,3 +70,9 @@ volumes:
       type: none
       device: /home/enzo/data/mariadb
       o: bind
+
+
+networks:
+  inception:
+    name: inception
+    driver: bridge

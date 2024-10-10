@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y nginx openssl
 
 COPY ./requirements/nginx/conf/nginx.conf /etc/nginx/sites-available/default
-COPY requirements/nginx/conf/index.html /var/www/html/index.html
+COPY ./requirements/nginx/conf/index.php /var/www/html/index.php
 
 # mkdir -p requirements/nginx/certs
 # openssl req -newkey rsa:2048 -nodes -keyout server.key -x509 -days 365 -out server.crt
