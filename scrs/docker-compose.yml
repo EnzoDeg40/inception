@@ -21,9 +21,9 @@ services:
       - wordpress
     ports:
       - "443:443"
-    # volumes:
-      # - wordpress_data:/var/www/html
-    restart: always # sure ?
+    volumes:
+      - wordpress_data:/var/www/html
+    restart: always
     networks:
       - inception
   wordpress:
@@ -34,8 +34,8 @@ services:
       dockerfile: requirements/wordpress/Dockerfile
     ports:
       - "9000:9000"
-    # volumes:
-    #   - wordpress_data:/var/www/html
+    volumes:
+      - wordpress_data:/var/www/html
     restart: always
     depends_on:
       - mariadb
