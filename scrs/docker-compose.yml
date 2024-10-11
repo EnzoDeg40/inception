@@ -41,6 +41,8 @@ services:
       - mariadb
     networks:
       - inception
+    env_file:
+      - .env
   mariadb:
     container_name: mariadb
     image: mariadb
