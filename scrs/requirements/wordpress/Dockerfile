@@ -16,24 +16,24 @@ RUN wget https://wordpress.org/latest.tar.gz \
     && rm latest.tar.gz
 
 # RUN chown -R www-data:www-data /var/www/html
-RUN cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+# RUN cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+RUN rm /var/www/html/wp-config-sample.php
+# RUN rm /var/www/html/wp-config.php
+
+# copie le fichier de configuration de PHP-FPM
+COPY ./requirements/wordpress/conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 
 # Copie le script de création de la base de données
 COPY ./requirements/wordpress/setup.sh /tmp/setup.sh
 RUN chmod +x /tmp/setup.sh
-ENTRYPOINT ["/bin/bash", "/tmp/setup.sh"]
+# ENTRYPOINT ["/bin/bash", "/tmp/setup.sh"]
+RUN ["/bin/bash", "/tmp/setup.sh"]
 
-# install wp-cli
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-RUN chmod +x wp-cli.phar
-RUN mv wp-cli.phar /usr/local/bin/wp
 
 # RUN wp config create --dbname=wordpress --dbuser=root --dbpass=motdepasse --dbhost=localhost
 # https://chatgpt.com/share/67092a63-02a4-800e-8687-d53f808fbba6
 # RUN wp core install --url=localhost --title=enzo_wp --admin_user=admin --admin_password=admin --admin_email=admin@example.com --allow-root --path=/var/www/html
 
-# copie le fichier de configuration de PHP-FPM
-COPY ./requirements/wordpress/conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 CMD ["php-fpm7.4", "-F"]

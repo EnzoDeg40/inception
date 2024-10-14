@@ -18,3 +18,12 @@ netsh interface ip add dns name="Ethernet" addr=8.8.8.8 index=2
 
 ## Show
 ipconfig /all
+
+## TODO
+- [x] Nginx autoredirect to https
+- [ ] Nginx genereate certficate inside container
+- [x] Nginx Wordpress setup Volume
+- [ ] Setup DNS 
+- [x] Change nginx port
+- [ ] Make wordpress setup
+- [ ] Create setup instructions in README.md
