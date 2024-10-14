@@ -1,15 +1,5 @@
 FROM debian:bullseye
 
-# Récupère les variables d'environnement de Docker Compose
-# ENV MARIA_DATABASE=${MARIA_DATABASE}
-# ENV MARIA_USER=${MARIA_USER}
-# ENV MARIA_PASSWORD=${MARIA_PASSWORD}
-
-ENV MARIA_DATABASE=wp
-ENV MARIA_USER=enzo
-ENV MARIA_PASSWORD=enzo
-
-
 RUN apt-get update
 RUN apt-get install -y wget php7.4 php7.4-fpm php7.4-mysql php7.4-cli
 
@@ -26,13 +16,13 @@ RUN wget https://wordpress.org/latest.tar.gz \
     && rm latest.tar.gz
 
 # RUN chown -R www-data:www-data /var/www/html
-
-# copie le fichier de xconfiguration de PHP
 RUN cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
-RUN sed -i "s/username_here/$MARIA_USER/g" /var/www/html/wp-config.php
-RUN sed -i "s/password_here/$MARIA_PASSWORD/g" /var/www/html/wp-config.php
-RUN sed -i "s/localhost/mariadb/g" /var/www/html/wp-config.php
-RUN sed -i "s/database_name_here/$MARIA_DATABASE/g" /var/www/html/wp-config.php
+
+
+# Copie le script de création de la base de données
+COPY ./requirements/wordpress/setup.sh /tmp/setup.sh
+RUN chmod +x /tmp/setup.sh
+ENTRYPOINT ["/bin/bash", "/tmp/setup.sh"]
 
 # install wp-cli
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar

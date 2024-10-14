@@ -3,18 +3,17 @@
 # Debug
 set -xe 
 
-mkdir -p /var/www/html
+if [ -f ./wp-config.php ]
+then
+	echo "wordpress already downloaded"
+else
 
-wget https://wordpress.org/latest.tar.gz \
-    && tar -xvzf latest.tar.gz -C /var/www/html --strip-components=1 \
-    && rm latest.tar.gz
+# copie le fichier de xconfiguration de PHP
+sed -i "s/username_here/${MARIA_USER}/g" /var/www/html/wp-config.php
+sed -i "s/password_here/${MARIA_PASSWORD}/g" /var/www/html/wp-config.php
+sed -i "s/localhost/mariadb/g" /var/www/html/wp-config.php
+sed -i "s/database_name_here/${MARIA_DATABASE}/g" /var/www/html/wp-config.php
 
-chown -R www-data:www-data /var/www/html
+fi
 
-
-#Inport env variables in the config file
-# cp wp-config-sample.php wp-config.php
-# sed -i "s/username_here/$MYSQL_USER/g" wp-config.php
-# sed -i "s/password_here/$MYSQL_PASSWORD/g" wp-config.php
-# sed -i "s/localhost/$MYSQL_HOSTNAME/g" wp-config.php
-# sed -i "s/database_name_here/$MYSQL_DATABASE/g" wp-config.php
+exec "$@" # a quoi il sert ?
