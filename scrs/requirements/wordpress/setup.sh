@@ -24,7 +24,7 @@ wp core install --path=/var/www/html \
     --admin_password="admin_password" \
     --admin_email="admin@example.com" --allow-root
 
-wp core download --allow-root
+# wp core download --allow-root # what ?
 
 fi
 
