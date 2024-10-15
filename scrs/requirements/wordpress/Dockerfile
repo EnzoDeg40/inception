@@ -18,12 +18,6 @@ RUN wget https://wordpress.org/latest.tar.gz \
 # RUN chown -R www-data:www-data /var/www/html
 RUN cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
-
-# Copie le script de création de la base de données
-COPY ./requirements/wordpress/setup.sh /tmp/setup.sh
-RUN chmod +x /tmp/setup.sh
-ENTRYPOINT ["/bin/bash", "/tmp/setup.sh"]
-
 # install wp-cli
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
@@ -35,5 +29,10 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 # copie le fichier de configuration de PHP-FPM
 COPY ./requirements/wordpress/conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+# Copie le script d'installation de Wordpress
+COPY ./requirements/wordpress/setup.sh /tmp/setup.sh
+RUN chmod +x /tmp/setup.sh
+ENTRYPOINT ["/bin/bash", "/tmp/setup.sh"]
 
 CMD ["php-fpm7.4", "-F"]
