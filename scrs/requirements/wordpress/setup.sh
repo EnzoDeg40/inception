@@ -18,7 +18,7 @@ wp config create --path=/var/www/html \
     --dbhost="mariadb" --allow-root
 
 wp core install --path=/var/www/html \
-    --url="http://localhost" \
+    --url="https://edegraev.42.fr/" \
     --title="My WordPress" \
     --admin_user="admin" \
     --admin_password="admin_password" \
