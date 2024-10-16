@@ -5,13 +5,9 @@ RUN apt-get install -y nginx openssl
 
 COPY ./requirements/nginx/conf/nginx.conf /etc/nginx/sites-available/default
 
-# mkdir -p requirements/nginx/certs
-# openssl req -newkey rsa:2048 -nodes -keyout server.key -x509 -days 365 -out server.crt
-
 # Ajoute le certificat
-COPY ./requirements/nginx/certs/server.crt /etc/nginx/certs/server.crt  
-# Ajoute la clé
-COPY ./requirements/nginx/certs/server.key /etc/nginx/certs/server.key 
+RUN mkdir /etc/nginx/certs
+RUN openssl req -newkey rsa:2048 -nodes -keyout /etc/nginx/certs/server.key -x509 -days 365 -out /etc/nginx/certs/server.crt -subj "/C=FR/ST=Ile-de-France/L=Paris/O=42/OU=42 Paris/CN=edegraev.42.fr/emailAddress=edegraev@student.42.fr"
 
 EXPOSE 8080
 
