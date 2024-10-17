@@ -23,7 +23,7 @@ services:
       - "443:443"
     volumes:
       - wordpress_data:/var/www/html
-      # - website_data:/var/www/home
+      - website_data:/var/www/home
     restart: always
     networks:
       - inception
@@ -54,6 +54,7 @@ services:
       - "3306:3306"
     env_file:
       - .env
+      # what
     # volumes:
     #   - mariadb_data:/var/lib/mysql
     networks:
