@@ -23,6 +23,7 @@ services:
       - "443:443"
     volumes:
       - wordpress_data:/var/www/html
+      # - website_data:/var/www/home
     restart: always
     networks:
       - inception
@@ -57,7 +58,16 @@ services:
     #   - mariadb_data:/var/lib/mysql
     networks:
       - inception
-
+  website:
+    container_name: website
+    image: website
+    build:
+      context: .
+      dockerfile: requirements/bonus/website/Dockerfile
+    networks:
+      - inception
+    volumes:
+      - website_data:/var/www/home
 
 volumes:
   wordpress_data:
@@ -72,7 +82,13 @@ volumes:
       type: none
       device: /home/enzo/data/mariadb
       o: bind
-
+  # bonus
+  website_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/enzo/data/website
+      o: bind
 
 networks:
   inception:
