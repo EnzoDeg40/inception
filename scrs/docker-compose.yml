@@ -65,8 +65,6 @@ services:
     build:
       context: .
       dockerfile: requirements/bonus/website/Dockerfile
-    networks:
-      - inception
     volumes:
       - website_data:/var/www/home
 

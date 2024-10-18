@@ -10,11 +10,13 @@ check:
 create_folders: check
 	@test -d /home/enzo/data/wordpress || sudo mkdir -p /home/enzo/data/wordpress
 	@test -d /home/enzo/data/mariadb || sudo mkdir -p /home/enzo/data/mariadb
+	@test -d /home/enzo/data/website || sudo mkdir -p /home/enzo/data/website
 
 # Remove folders for volumes	
 remove_folders: check
 	sudo rm -rf /home/enzo/data/wordpress
 	sudo rm -rf /home/enzo/data/mariadb
+	sudo rm -rf /home/enzo/data/website
 
 # Clean and rebuild the project
 re: clean all
@@ -36,3 +38,4 @@ clean: check
 	-docker network rm $$(docker network ls -q)
 
 .PHONY: all re reset clean
+
