@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image 
-      run: cp scrs/.env.template scrs/.env && make 
+      run: cp scrs/.env.template scrs/.env && docker compose -f scrs/docker-compose.yml up -d 
