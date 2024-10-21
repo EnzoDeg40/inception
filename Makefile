@@ -18,6 +18,12 @@ remove_folders: check
 	sudo rm -rf /home/enzo/data/mariadb
 	sudo rm -rf /home/enzo/data/website
 
+up: check
+	docker compose -f scrs/docker-compose.yml up -d
+
+down: check
+	docker compose -f scrs/docker-compose.yml down
+
 # Clean and rebuild the project
 re: clean all
 

@@ -14,8 +14,7 @@ else
         --dbuser="${MARIA_USER}" \
         --dbpass="${MARIA_PASSWORD}" \
         --dbhost="mariadb" --allow-root \
-        --locale="fr_FR" \
-        --skip-email
+        --locale="fr_FR"
 fi
 
 # check if admin username is valid
