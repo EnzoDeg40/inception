@@ -29,6 +29,9 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
 
+# download adminer
+RUN wget https://www.adminer.org/latest.php -O /var/www/html/adminer.php
+
 # copie le fichier de configuration de PHP-FPM
 COPY ./requirements/wordpress/conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
