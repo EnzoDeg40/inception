@@ -67,6 +67,16 @@ services:
       dockerfile: requirements/bonus/website/Dockerfile
     volumes:
       - website_data:/var/www/home
+  redis:
+    container_name: redis
+    image: redis
+    build:
+      context: .
+      dockerfile: requirements/bonus/redis/Dockerfile
+    ports:
+      - "6379:6379"
+    networks:
+      - inception
 
 volumes:
   wordpress_data:
