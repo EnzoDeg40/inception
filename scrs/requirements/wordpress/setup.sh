@@ -48,4 +48,18 @@ else
         --allow-root
 fi
 
+# Install redis plugin
+if wp plugin is-installed --path=/var/www/html --allow-root redis-cache; then
+    echo "Redis plugin already installed"
+else
+    wp plugin install --path=/var/www/html redis-cache --activate --allow-root
+
+    wp config set --path=/var/www/html WP_CACHE true --type=constant --allow-root
+    wp config set --path=/var/www/html WP_REDIS_HOST redis --type=constant --allow-root
+    wp config set --path=/var/www/html WP_REDIS_PORT 6379 --type=constant --allow-root
+    wp config set --path=/var/www/html WP_REDIS_TIMEOUT 1 --type=constant --allow-root
+    wp config set --path=/var/www/html WP_REDIS_READ_TIMEOUT 1 --type=constant --allow-root
+    wp config set --path=/var/www/html WP_REDIS_DATABASE 0 --type=constant --allow-root
+fi
+
 exec "$@"

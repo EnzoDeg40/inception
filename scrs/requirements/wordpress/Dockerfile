@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 RUN apt-get update
-RUN apt-get install -y wget php7.4 php7.4-fpm php7.4-mysql php7.4-cli
+RUN apt-get install -y wget php7.4 php7.4-fpm php7.4-mysql php7.4-cli php7.4-redis
 
 # chatgpt suggest:
 # RUN apt-get update && apt-get install -y --no-install-recommends \
