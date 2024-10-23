@@ -62,4 +62,6 @@ else
     wp config set --path=/var/www/html WP_REDIS_DATABASE 0 --type=constant --allow-root
 fi
 
+wp redis enable --path=/var/www/html --allow-root
+
 exec "$@"
