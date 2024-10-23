@@ -81,6 +81,24 @@ services:
       - wordpress_data:/var/www/html
     restart: always
 
+  vsftpd:
+    container_name: vsftpd
+    build: ./requirements/bonus/vsftpd/.
+    image: vsftpd
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    env_file:
+      - .env
+    ports:
+      - "21:21"
+      - "20:20"
+      - "50000-50005:50000-50005"
+    networks:
+      - inception
+    restart: always
+
 volumes:
   wordpress_data:
     driver: local
