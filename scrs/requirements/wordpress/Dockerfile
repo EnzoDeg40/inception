@@ -1,7 +1,6 @@
 FROM debian:bullseye
 
-RUN apt-get update
-RUN apt-get install -y wget php7.4 php7.4-fpm php7.4-mysql php7.4-cli php7.4-redis
+RUN apt-get update && apt-get install -y wget php7.4 php7.4-fpm php7.4-mysql php7.4-cli php7.4-redis
 
 # create the directory for the PHP-FPM socket and for wordpress installation
 RUN mkdir -p /run/php
