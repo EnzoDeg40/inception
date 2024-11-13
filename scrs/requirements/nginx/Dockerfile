@@ -11,5 +11,4 @@ RUN openssl req -newkey rsa:2048 -nodes -keyout /etc/nginx/certs/server.key -x50
 
 EXPOSE 443
 
-# Démarre Nginx
 CMD ["nginx", "-g", "daemon off;"]
