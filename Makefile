@@ -14,9 +14,9 @@ create_folders: check
 
 # Remove folders for volumes	
 remove_folders: check
-	rm -rf /home/enzo/data/wordpress
-	rm -rf /home/enzo/data/mariadb
-	rm -rf /home/enzo/data/website
+	rm -rf /home/enzo/data/wordpress || sudo rm -rf /home/enzo/data/wordpress
+	rm -rf /home/enzo/data/mariadb || sudo rm -rf /home/enzo/data/mariadb
+	rm -rf /home/enzo/data/website || sudo rm -rf /home/enzo/data/website
 
 up: check
 	docker compose -f scrs/docker-compose.yml up -d
