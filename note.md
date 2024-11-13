@@ -18,3 +18,17 @@ netsh interface ip add dns name="Ethernet" addr=8.8.8.8 index=2
 
 ## Show
 ipconfig /all
+
+
+
+
+Edit `nano /etc/resolv.conf`
+```conf
+nameserver 0.0.0.0
+nameserver 1.1.1.1
+nameserver 8.8.8.8
+```
+Empecher la modification du fichier
+```bash
+sudo chattr +i /etc/resolv.conf
+```

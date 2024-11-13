@@ -1,16 +1,5 @@
 services:
-  dnsmasq:
-    container_name: dnsmasq
-    image: dnsmasq
-    build:
-      context: .
-      dockerfile: requirements/bonus/dnsmasq/Dockerfile
-    ports:
-      - "53:53"
-      - "53:53/udp"
-    restart: always
-    networks:
-      - inception
+  # mandatory
   nginx:
     container_name: nginx
     image: nginx
@@ -48,17 +37,15 @@ services:
     container_name: mariadb
     image: mariadb
     build:
-      context: . # verifier le contexte https://stackoverflow.com/questions/32997269/copying-a-file-in-a-dockerfile-no-such-file-or-directory
+      context: .
       dockerfile: requirements/mariadb/Dockerfile
     ports:
       - "3306:3306"
     env_file:
       - .env
-      # what
-    # volumes:
-    #   - mariadb_data:/var/lib/mysql
     networks:
       - inception
+    restart: always
   website:
     container_name: website
     image: website
@@ -67,6 +54,7 @@ services:
       dockerfile: requirements/bonus/website/Dockerfile
     volumes:
       - website_data:/var/www/home
+  # bonus
   redis:
     container_name: redis
     image: redis
@@ -80,7 +68,18 @@ services:
     volumes:
       - wordpress_data:/var/www/html
     restart: always
-
+  dnsmasq:
+    container_name: dnsmasq
+    image: dnsmasq
+    build:
+      context: .
+      dockerfile: requirements/bonus/dnsmasq/Dockerfile
+    ports:
+      - "53:53"
+      - "53:53/udp"
+    restart: always
+    networks:
+      - inception
   vsftpd:
     container_name: vsftpd
     build: ./requirements/bonus/vsftpd/.
@@ -100,6 +99,7 @@ services:
     restart: always
 
 volumes:
+  # mandatory
   wordpress_data:
     driver: local
     driver_opts:
