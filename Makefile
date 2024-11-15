@@ -1,6 +1,6 @@
 # Build and run the project
 all: check create_folders
-	docker compose -f scrs/docker-compose.yml up -d --build
+	docker compose -f srcs/docker-compose.yml up -d --build
 
 # Check if Docker is running 
 check:
@@ -19,10 +19,10 @@ remove_folders: check
 	rm -rf /home/enzo/data/website || sudo rm -rf /home/enzo/data/website
 
 up: check
-	docker compose -f scrs/docker-compose.yml up -d
+	docker compose -f srcs/docker-compose.yml up -d
 
 down: check
-	docker compose -f scrs/docker-compose.yml down
+	docker compose -f srcs/docker-compose.yml down
 
 # Clean and rebuild the project
 re: clean all
