@@ -46,6 +46,8 @@ services:
     networks:
       - inception
     restart: always
+    volumes:
+      - mariadb_data:/var/lib/mysql
   website:
     container_name: website
     image: website
